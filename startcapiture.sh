@@ -29,9 +29,9 @@ raspi-gpio set 18 dh
 
 # Start recording
 echo "Start recording..."
-FILE=$HOME/$(date +%F_%H-%M-%S).flac
-screen -dm bash -c "jack_capture --disable-console -fn $FILE-1.flac -f flac -p system:capture_* --channels 8 "
-screen -dm bash -c "jack_capture --disable-console -fn $FILE-2.flac -f flac -p system:capture_9 -p system:capture_10 -p system:capture_11 -p system:capture_12 -p system:capture_13 -p system:capture_14 -p system:capture_15 -p system:capture_16"
+FILE=$HOME/$(date +%F_%H-%M-%S)
+screen -dm bash -c "jack_capture --disable-console -fn $FILE.1.flac -f flac -p system:capture_* --channels 8 "
+screen -dm bash -c "jack_capture --disable-console -fn $FILE.2.flac -f flac -p system:capture_9 -p system:capture_10 -p system:capture_11 -p system:capture_12 -p system:capture_13 -p system:capture_14 -p system:capture_15 -p system:capture_16"
 
 echo "Recording started, main loop"
 
