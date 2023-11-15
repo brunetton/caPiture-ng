@@ -1,4 +1,4 @@
-# Headless multitrack audio recording for your Raspberry Pi.
+Headless multitrack audio recording for your Raspberry Pi
 
 ## What is it ?
 
@@ -60,3 +60,8 @@ This installation process haven't been fully tested; it's possible that minor th
 Once you've installed it on your Raspbian SD card, you'll have to add a LED and a push button:
 - Connect GPIO 18 (PIN 12) to the + leg of an LED with a 330 Ohm resistor in between, other leg to gnd
 - Attach button to GPIO 3 (PIN 5), other leg to gnd
+
+## TODO
+
+- add options to `startcapiture` script, mainly option to set the number of channels to record
+- remove the use of screen. Maybe using `simple` service type instead of `oneshot` ?
