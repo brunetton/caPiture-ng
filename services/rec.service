@@ -1,0 +1,12 @@
+[Unit]
+Description=Record from mix table
+Wants=basic.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=pi
+ExecStart=/home/pi/capiture-ng/startcapiture.sh
+
+[Install]
+WantedBy=multi-user.target

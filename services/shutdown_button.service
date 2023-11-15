@@ -1,0 +1,10 @@
+[Unit]
+Description=Shutdown button
+Wants=basic.target
+
+[Service]
+Type=simple
+ExecStart=/home/pi/capiture-ng/shutdown_button.py &
+
+[Install]
+WantedBy=basic.target
