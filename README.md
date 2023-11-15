@@ -38,13 +38,15 @@ This installation process haven't been fully tested; it's possible that minor th
     ```bash
     sudo dd bs=4M if=nameoftheimage of=/dev/yoursdcard status=progress conv=fsync
     ```
-- mount the SD card, we'll add some scripts to the `rootfs` partition (not the `bootfs` one)
-- go to /home/pi/ of SD card (replace `[mount_point]` by partition mount point, typically something like `/media/bruno/rootfs/`)
+On the Raspberry Pi:
+- launch `raspi-config` and set the Rpi to autologin in console mode
+- install required software
     ```bash
-    cd [mount_point]/home/pi
+    sudo apt install --no-install-recommends jackd2 jack-capture dbus-x11 python
     ```
 - clone git repository
     ```bash
+    cd ~
     git clone https://github.com/brunetton/capiture-ng.git
     ```
 - add systemd services files to /etc/systemd/system/ and enable services
@@ -60,6 +62,14 @@ This installation process haven't been fully tested; it's possible that minor th
 Once you've installed it on your Raspbian SD card, you'll have to add a LED and a push button:
 - Connect GPIO 18 (PIN 12) to the + leg of an LED with a 330 Ohm resistor in between, other leg to gnd
 - Attach button to GPIO 3 (PIN 5), other leg to gnd
+
+## Usage
+
+- to set the number of channels to record you'll have to edit `startcapiture.sh` script, in "start recording" section, in command line arguments to  `jack_capture`. Example, for 12-tracks recording:
+    `jack_capture --disable-console -fn $FILE-2.flac -f flac -p system:capture_9 -p system:capture_10 -p system:capture_11 -p system:capture_12`
+- as FLAC is limited to 8 channels, we start 2 `jack_capture` processes. This results in 2 output files:
+    - `2023-09-02_01-20-32.1.flac` that contains channels 1-8
+    - `2023-09-02_01-20-32.2.flac` that contains channels 9-16
 
 ## TODO
 
