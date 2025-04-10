@@ -65,3 +65,5 @@ done
 
 echo "Stop recording..."
 pkill jack_capture
+# led off
+raspi-gpio set 18 dl
