@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Add a fake X session
-echo "DISPLAY=:0" > "$HOME/bin/setsession"
-dbus-launch >> "$HOME/bin/setsession"
-chmod +x "$HOME/bin/setsession"
-. "$HOME/bin/setsession"
+echo "DISPLAY=:0" > "$HOME/setsession"
+dbus-launch >> "$HOME/setsession"
+chmod +x "$HOME/setsession"
+. "$HOME/setsession"
 
 export DISPLAY
 export DBUS_SESSION_BUS_ADDRESS
