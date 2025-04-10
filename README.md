@@ -56,10 +56,17 @@ On the Raspberry Pi:
     systemd enable rec
     systemd enable startcapiture
     ```
+- configure Pi user to be allowed to launch Jack in high priority mode: edit `/etc/security/limits.conf` and add:
+
+      pi          -       rtprio        99
+      pi          -       nice          -10
+      pi          -       memlock       unlimited
+
+https://openstagecontrol.ammd.net/download/
 
 ### Hardware
 
-Once you've installed it on your Raspbian SD card, you'll have to add a LED and a push button:
+Once you've installed it on your Raspbian SD card, you can add a LED and a push button:
 - Connect GPIO 18 (PIN 12) to the + leg of an LED with a 330 Ohm resistor in between, other leg to gnd
 - Attach button to GPIO 3 (PIN 5), other leg to gnd
 
