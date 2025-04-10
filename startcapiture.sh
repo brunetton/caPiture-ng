@@ -56,9 +56,12 @@ do
         fi
     else
         # Stop blinking
-        pkill -SIGTERM blink.sh
+        pkill blink.sh
         # Led ON
         raspi-gpio set 18 dh
     fi
     sleep 1
 done
+
+echo "Stop recording..."
+pkill jack_capture
