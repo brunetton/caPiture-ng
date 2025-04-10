@@ -19,7 +19,8 @@ As caPiture we use one LED to have a visual feedback of what's going on.
 ## What it does exactly ?
 
 - power on => led OFF
-- jack is ready => LED ON (steady)
+- waiting for mixer to be plugged ...
+- mixer plugged -> jack is ready => LED ON (steady)
 - then, each second:
     - if jack_capture is correctly running (ie it's recording), LED is blinking
 - when button is pressed, recording stops and RPi power off
