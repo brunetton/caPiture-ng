@@ -16,15 +16,24 @@ raspi-gpio set 18 dh
 sleep 2
 raspi-gpio set 18 dl
 
-# Start JACK server
-sleep 5
-echo "Starting Jack ..."
-jackd -dalsa -dhw:X18XR18 -r44100 -p2048 -n3 &
+while true; do
+    # Start JACK server
+    echo "Starting Jack ..."
+    jackd --realtime -dalsa -dhw:X18XR18 -r44100 -p2048 -n3 &
+
+    sleep 1
+
+    echo "Waiting for jack (every seconds, max 6 seconds) ..."
+    if jack_wait -w -t 6 2&> /dev/null; then
+        # TODO: check that jack_wait is actually waiting when jack is starting correctly
+        echo "Jack is running :)"
+        break
+    else
+        pkill jackd > /dev/null # just in case, but shouldn't exists
+    fi
+done
 
 # Light up LED on pin 18 when JACK is available
-echo "Waiting for Jack ..."
-jack_wait -w
-echo "Jack is running :)"
 raspi-gpio set 18 dh
 
 # Start recording
@@ -35,7 +44,7 @@ screen -dm bash -c "jack_capture --disable-console -fn $FILE.2.flac -f flac -p s
 
 echo "Recording started, main loop"
 
-while [ : ]
+while true
 do
     # Check if jack_capture is running
     if (( $(pgrep -af jack_capture | wc -l) >= 1 )); then
